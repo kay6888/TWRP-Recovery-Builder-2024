@@ -160,6 +160,9 @@ jobs:
         cd workspace
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
+        export BUILD_BROKEN_DUP_RULES := true
+        export BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+        export BUILD_BROKEN_NINJA_USES_ENV_VARS += RTIC_MPGEN
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ github.event.inputs.BUILD_TARGET }}.img"
       
