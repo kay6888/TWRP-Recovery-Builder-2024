@@ -82,10 +82,10 @@ jobs:
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
       
-    - name: Set Swap Space
-      uses: pierotofy/set-swap-space@master
-      with:
-        swap-size-gb: 24
+    #name: Set Swap Space
+      #uses: pierotofy/set-swap-space@master
+      #with:
+       # swap-size-gb: 24
         
     - name: Prepare the environment
       run: |
@@ -161,8 +161,6 @@ jobs:
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
         export BUILD_BROKEN_DUP_RULES := true
-        export VARIABLE_NAME="value"
-        export BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ github.event.inputs.BUILD_TARGET }}.img"
       
