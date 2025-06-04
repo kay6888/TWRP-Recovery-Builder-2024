@@ -41,7 +41,7 @@ on:
       LDCHECK:
         description: 'Path of blobs to check' 
         required: true
-        default: 'vendor/bin/qseecomd'
+        default: 'system/bin/qseecomd'
       RECOVERY_TAR:
         description: 'Release Recovery.tar For Samsung devices'
         required: false
@@ -159,6 +159,7 @@ jobs:
       run: |
         cd workspace
         source build/envsetup.sh
+        export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ github.event.inputs.BUILD_TARGET }}.img"
 
