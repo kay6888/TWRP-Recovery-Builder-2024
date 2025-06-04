@@ -121,8 +121,8 @@ jobs:
         mkdir workspace
         cd workspace
         git config --global user.name "kay6888"
-        git config --global user.email "yupyupper6996@gmail.com"
-        repo init --depth=1 -u ${{ steps.manifest.outputs.value }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
+        git config --global user.email "pbkilla6888@gmail.com"
+        repo init --depth=4 -u ${{ steps.manifest.outputs.value }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
   
     - name: Repo Sync
       run: |
