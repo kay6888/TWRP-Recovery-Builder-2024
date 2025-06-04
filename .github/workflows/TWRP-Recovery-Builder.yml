@@ -41,7 +41,7 @@ on:
       LDCHECK:
         description: 'Path of blobs to check' 
         required: true
-        default: 'system/bin/qseecomd'
+        default: 'vendor/bin/qseecomd'
       RECOVERY_TAR:
         description: 'Release Recovery.tar For Samsung devices'
         required: false
