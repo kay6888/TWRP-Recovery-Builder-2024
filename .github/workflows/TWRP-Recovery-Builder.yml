@@ -161,11 +161,7 @@ jobs:
         source build/envsetup.sh
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ github.event.inputs.BUILD_TARGET }}.img"
-  
-        if [ ! -f "workspace/tools/asuite/asuite.sh" ]; then
-        echo "asuite.sh not found, skipping step."
-        exit 0 
-        fi
+
 
     - name: Set Build Date # Output will be use in Release
       run: |
@@ -188,7 +184,7 @@ jobs:
             echo "MD5_IMG=$(md5sum out/target/product/${{ github.event.inputs.DEVICE_NAME }}/vendor_boot.img | cut -d ' ' -f 1)" >> $GITHUB_ENV
         else
             echo "No Recovery file found!"
-            cd exit
+            cd 1
         fi
 
     - name: Include Recovery Installer
