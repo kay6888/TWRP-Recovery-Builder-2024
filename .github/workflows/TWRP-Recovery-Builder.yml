@@ -52,9 +52,8 @@ on:
         type: boolean
         required: true
         default: true
-        
 jobs:
-build:
+  build:
     name: Build TWRP by ${{ github.actor }}
     runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
