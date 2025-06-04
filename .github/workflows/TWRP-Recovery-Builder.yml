@@ -52,8 +52,8 @@ on:
         type: boolean
         required: true
         default: true
-
- 
+        
+jobs:
 build:
     name: Build TWRP by ${{ github.actor }}
     runs-on: ubuntu-22.04
