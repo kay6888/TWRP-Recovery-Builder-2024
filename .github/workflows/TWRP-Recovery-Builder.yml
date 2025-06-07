@@ -16,7 +16,7 @@ on:
       DEVICE_TREE:
         description: 'Custom Recovery Tree' 
         required: true
-        default: 'https://github.com/kay6888/andoid-motorola-fogo.git'
+        default: 'https://github.com/kay6888/android_device_motorola_fogo.git'
       DEVICE_TREE_BRANCH:
         description: 'Custom Recovery Tree Branch' 
         required: true
@@ -120,8 +120,8 @@ jobs:
       run: |
         mkdir workspace
         cd workspace
-        git config --global user.name "Samuel Kendall"
-        git config --global user.email "kinguser981@gmail.com"
+        git config --global user.name "kay6888"
+        git config --global user.email "pbkilla6888@gmail.com"
         repo init --depth=1 -u ${{ steps.manifest.outputs.value }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
   
     - name: Repo Sync
@@ -184,7 +184,7 @@ jobs:
             echo "MD5_IMG=$(md5sum out/target/product/${{ github.event.inputs.DEVICE_NAME }}/vendor_boot.img | cut -d ' ' -f 1)" >> $GITHUB_ENV
         else
             echo "No Recovery file found!"
-            cd 1
+            cd EXIT
         fi
 
     - name: Include Recovery Installer
