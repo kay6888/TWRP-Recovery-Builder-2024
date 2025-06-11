@@ -158,9 +158,8 @@ jobs:
     - name: Building Image 
       run: |
         cd workspace
-        source build/envsetup.sh
-       # source device_motorola_sm6375-common
-        export ALLOW_MISSING_DEPENDENCIES=true
+        source build/envsetup.sh                           
+        export.ALLOW_MISSING_DEPENDENCIES=true                                    
         export TARGET_NO_RECOVERY=true 
         export Target=device/motorola/fogo
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
