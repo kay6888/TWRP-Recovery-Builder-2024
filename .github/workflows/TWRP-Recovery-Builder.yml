@@ -177,6 +177,12 @@ jobs:
       run: |
         echo "BUILD_DATE=$(date +%Y%m%d)" >> $GITHUB_ENV
 
+        if [ -f "workspace/tools/asuite/asuite.sh" ]; then
+          source workspace/tools/asuite/asuite.sh
+        else
+           echo "asuite.sh not found, skipping completion setup."  
+        fi
+
     - name: Check if Recovery Exist
       run: |
         cd workspace
