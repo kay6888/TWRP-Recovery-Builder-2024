@@ -159,7 +159,7 @@ jobs:
       run: |
         cd workspace
         source build/envsetup.sh
-        source device_motorola_sm6375-common
+       # source device_motorola_sm6375-common
         export ALLOW_MISSING_DEPENDENCIES=true
         export TARGET_NO_RECOVERY=true 
         export Target=device/motorola/fogo
