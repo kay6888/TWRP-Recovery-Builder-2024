@@ -159,7 +159,7 @@ jobs:
       run: |
         cd workspace
         source build/envsetup.sh                           
-        export.ALLOW_MISSING_DEPENDENCIES=true                                    
+        export ALLOW_MISSING_DEPENDENCIES=true                                    
         export TARGET_NO_RECOVERY=true 
         export Target=device/motorola/fogo
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
