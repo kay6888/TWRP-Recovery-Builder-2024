@@ -6,7 +6,7 @@ on:
       MANIFEST_BRANCH:
         description: 'TWRP Minimal-Manifest Branch'
         required: true
-        default: 'twrp-14'
+        default: ''
         type: choice
         options:
         - twrp-14
@@ -16,23 +16,23 @@ on:
       DEVICE_TREE:
         description: 'Custom Recovery Tree' 
         required: true
-        default: 'https://github.com/kay6888/android_device_motorola_fogo.git'
+        default: 'https://github.com/kinguser981/cap_sprout_twrp'
       DEVICE_TREE_BRANCH:
         description: 'Custom Recovery Tree Branch' 
         required: true
-        default: 'android-14'
+        default: 'android-12.1'
       DEVICE_PATH:
         description: 'Specify your Device Path' 
         required: true
-        default: 'device/motorola/fogo'
+        default: 'device/nokia/cap_sprout'
       DEVICE_NAME:
         description: 'Specify your Device Codename' 
         required: true
-        default: 'fogo'
+        default: 'cap_sprout'
       BUILD_TARGET:
         description: 'Specify your Build Target' 
         required: true
-        default: 'boot'
+        default: 'recovery'
         type: choice
         options:
         - boot
@@ -99,7 +99,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: zulu
-        java-version: 17
+        java-version: 8
 
     - name: Install Git-Repo
       run: |
@@ -120,8 +120,8 @@ jobs:
       run: |
         mkdir workspace
         cd workspace
-        git config --global user.name "kay6888"
-        git config --global user.email "pbkilla6888@gmail.com"
+        git config --global user.name "Samuel Kendall"
+        git config --global user.email "kinguser981@gmail.com"
         repo init --depth=1 -u ${{ steps.manifest.outputs.value }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
   
     - name: Repo Sync
@@ -158,28 +158,14 @@ jobs:
     - name: Building Image 
       run: |
         cd workspace
-        source build/envsetup.sh                           
-        export ALLOW_MISSING_DEPENDENCIES=true                                    
-        export TARGET_NO_RECOVERY=true 
-        export Target=device/motorola/fogo
+        source build/envsetup.sh
+        export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ env.DEVICE_MAKEFILE }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
         echo "Done building your ${{ github.event.inputs.BUILD_TARGET }}.img"
-
-        if [ -f "workspace/tools/asuite/asuite.sh" ]; then
-            source workspace/tools/asuite/asuite.sh
-          else
-             echo "Warning: asuite.sh not found. Continuing without it."
-        fi
       
     - name: Set Build Date # Output will be use in Release
       run: |
         echo "BUILD_DATE=$(date +%Y%m%d)" >> $GITHUB_ENV
-
-        if [ -f "workspace/tools/asuite/asuite.sh" ]; then
-          source workspace/tools/asuite/asuite.sh
-        else
-           echo "asuite.sh not found, skipping completion setup."  
-        fi
 
     - name: Check if Recovery Exist
       run: |
@@ -198,7 +184,7 @@ jobs:
             echo "MD5_IMG=$(md5sum out/target/product/${{ github.event.inputs.DEVICE_NAME }}/vendor_boot.img | cut -d ' ' -f 1)" >> $GITHUB_ENV
         else
             echo "No Recovery file found!"
-            cd EXIT
+            cd Exit
         fi
 
     - name: Include Recovery Installer
