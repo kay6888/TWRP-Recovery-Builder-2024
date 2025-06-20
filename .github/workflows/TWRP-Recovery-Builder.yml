@@ -16,7 +16,7 @@ on:
       DEVICE_TREE:
         description: 'Custom Recovery Tree' 
         required: true
-        default: 'https://github.com/TeamWin/Team-Win-Recovery-Project.git'
+        default: 'https://github.com/smiley9000/device_motorola_fogo.git'
       DEVICE_TREE_BRANCH:
         description: 'Custom Recovery Tree Branch' 
         required: true
